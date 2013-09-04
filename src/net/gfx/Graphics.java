@@ -1,10 +1,13 @@
 package net.gfx;
 
+import net.gfx.TileSet.Tiles;
+
 import org.lwjgl.opengl.GL11;
 
 public class Graphics {
 	
 	public static Gui gui;
+	public static TileSet Tile = new TileSet();
 	
 	int colors[][];
 	
@@ -15,7 +18,6 @@ public class Graphics {
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		
-		colors = new int[1280/20+1][720/20+1];
 		
 	}
 	
@@ -24,11 +26,11 @@ public class Graphics {
 		GL11.glClearColor(255, 255, 255, 255);
 		
 		GL11.glColor4f(0, 255, 0, 255);
-		for (int x = 0; x < colors.length; x++) {
-			for (int y = 0; y < colors[1].length; y++) {
-				GL11.glRecti(x*20, y*20, 20, 20);
-				
-			}
+		for (int i = 0; i < Tile.TILES; i++) {
+			GL11.glVertex2i(Tile.tiles[i].x, Tile.tiles[i].y);
+			GL11.glVertex2i(Tile.tiles[i].x + Tile.tiles[i].w, Tile.tiles[i].y);
+			GL11.glVertex2i(Tile.tiles[i].x + Tile.tiles[i].w, Tile.tiles[i].y + Tile.tiles[i].h);
+			GL11.glVertex2i(Tile.tiles[i].x, Tile.tiles[i].y + Tile.tiles[i].h);
 			
 		}
 		
